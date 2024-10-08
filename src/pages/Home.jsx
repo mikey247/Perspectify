@@ -6,6 +6,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  // console.log('Submitted URL:', url);
+  // console.log('Submitted Text:', text);
+  // console.log('Selected Source:', source);
+  // https://news.sky.com/story/lebanon-at-least-274-killed-and-more-than-1-000-injured-as-israel-widens-attack-on-hezbollah-targets-13220868
     const [url, setUrl] = useState('');
     const [text, setText] = useState('');
     const [source, setSource] = useState('');
@@ -16,19 +20,15 @@ const Home = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      // console.log('Submitted URL:', url);
-      // console.log('Submitted Text:', text);
-      // console.log('Selected Source:', source);
-      // https://news.sky.com/story/lebanon-at-least-274-killed-and-more-than-1-000-injured-as-israel-widens-attack-on-hezbollah-targets-13220868
       if(url===''){
         setLoading(true);
-        axios.post(import.meta.env.VITE_API_URL+"/news/",{
+        axios.post(import.meta.env.VITE_API_URL_LOCAL+"/news/",{
           url:url,
           article:text,
           source:source
         }).then((response) => {
           // console.log("Response ",response.data.result.results);
-          navigate('/news', { state: { result: response.data.result.results } });
+          navigate('/news', { state: { result: response.data.result } });
         }
         ).catch((error) => {
           console.log("Error ",error);
@@ -36,13 +36,13 @@ const Home = () => {
         });
       } else {
         setLoading(true);
-        axios.post(import.meta.env.VITE_API_URL+"/news/url",{
+        axios.post(import.meta.env.VITE_API_URL_LOCAL+"/news/url",{
           url:url,
           article:text,
           source:source
         }).then((response) => {
           // console.log("Response ",response.data.result.results);
-          navigate('/news', { state: { result: response.data.result.results } });
+          navigate('/news', { state: { result: response.data.result } });
         }
         ).catch((error) => {
           console.log("Error ",error);
@@ -100,7 +100,7 @@ const Home = () => {
                   id="text"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  placeholder="Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                  placeholder="Paste News Article Text Here"
                   className="w-full p-2 border rounded h-32 text-sm"
                 />
               </div>
