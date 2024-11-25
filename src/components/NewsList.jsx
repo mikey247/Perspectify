@@ -20,6 +20,8 @@ import NewsItem from './NewsItem';
 const NewsList = () => {
   const location = useLocation();
   const newsItems = location.state?.result || [];
+  const source = location.state?.source || '';
+  const source_bias = location.state?.source_bias || '';
 
   console.log('All news items:', newsItems);
 
@@ -29,14 +31,15 @@ const NewsList = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <header className="mb-6">
-          <Title />
-          <NavBar />
-        </header>
+      <header className="mb-6">
+        <Title />
+        <NavBar />
+      </header>
       <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Suggested News Articles</h2>
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">The article you posted is from <span className='text-4xl'>{source}</span>, which is usually considered to be <span className='text-4xl'>{source_bias}</span>  leaning, here are some suggestions</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {newsItems.map((item, index) => (
-          <NewsItem key={index} {...item } index={index} />
+          <NewsItem key={index} {...item} index={index} />
         ))}
       </div>
     </div>

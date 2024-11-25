@@ -28,7 +28,7 @@ const Home = () => {
           source:source
         }).then((response) => {
           // console.log("Response ",response.data.result.results);
-          navigate('/news', { state: { result: response.data.result } });
+          navigate('/news', { state: { result: response.data.result, source:response.data.source, source_bias: response.data.source_bias} });
         }
         ).catch((error) => {
           console.log("Error ",error);
@@ -42,7 +42,7 @@ const Home = () => {
           source:source
         }).then((response) => {
           // console.log("Response ",response.data.result.results);
-          navigate('/news', { state: { result: response.data.result } });
+          navigate('/news', { state: { result: response.data.result, source:response.data.source, source_bias: response.data.source_bias} });
         }
         ).catch((error) => {
           console.log("Error ",error);

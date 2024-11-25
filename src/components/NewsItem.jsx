@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'; // Import PropTypes
 
 
 // eslint-disable-next-line no-unused-vars
-const NewsItem = ({ pagemap, title, displayLink, link, index, snippet, bias }) => {
-    if (!pagemap || !pagemap.cse_image || !pagemap.cse_image[0]) {
-      // console.error('Missing image data for:', title, index);
-      return null;
-    }
+const NewsItem = ({ title, source, link, thumbnail, snippet, bias }) => {
+    // if (!pagemap || !pagemap.cse_image || !pagemap.cse_image[0]) {
+    //   // console.error('Missing image data for:', title, index);
+    //   return null;
+    // }
   
-    const imageUrl = pagemap.cse_image[0].src;
+    const imageUrl = thumbnail || 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'; // Fallback image
   
     return (
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -25,10 +25,10 @@ const NewsItem = ({ pagemap, title, displayLink, link, index, snippet, bias }) =
               }}
             />
           </div>
-          <div className="p-3 sm:p-4">
-           <div className="">
+          <div className="p-3 sm:p-4 ">
+           <div className="flex justify-between">
               <span className="inline-block bg-gray-900 rounded-full px-2 py-1 text-xs sm:text-sm font-semibold text-gray-100 mb-2">
-                {displayLink}
+                {source}
               </span>
               <span className="inline-block bg-gray-900 rounded-full px-2 py-1 text-xs sm:text-sm font-semibold text-gray-100 mb-2">
                 {bias}
@@ -45,9 +45,9 @@ const NewsItem = ({ pagemap, title, displayLink, link, index, snippet, bias }) =
    // Add prop validation for 'source'
  NewsItem.propTypes = {
     title: PropTypes.string.isRequired,
-    displayLink: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    pagemap: PropTypes.object.isRequired,
+    thumbnail: PropTypes.string.isRequired,
     snippet: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     bias: PropTypes.string.isRequired
